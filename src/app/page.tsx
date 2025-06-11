@@ -6,13 +6,22 @@ import Project from "./page/project";
 import Contact from "./page/contact";
 import Image from "next/image";
 import Navigation from "../components/navigation/Navigation";
+import Notification_Popup from "@/components/Notification/Notification_Popup";
+import Auto_Save from "@/components/Notification/Auto_Save";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("about");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showPopup, setShowPopup] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+  const [showSaveIndicator, setShowSaveIndicator] = useState(false);
 
   return (
     <div className="relative flex items-center justify-center h-full lg:h-screen w-full min-h-[100vh]  bg-black">
+      <Notification_Popup showPopup={showPopup} />
+      <Auto_Save showSaveIndicator={showSaveIndicator} />
       <div className="lg:max-w-[1500px] py-5 pb-15 lg:py-15 w-full flex lg:flex-row flex-col items-center lg:items-start justify-start lg:justify-center gap-4 md:gap-6 h-full">
         {/* left part */}
         <div className="flex flex-col items-center justify-center border-2 border-neutral-600 bg-white/20 backdrop-blur-sm h-auto lg:h-full w-[95%] lg:w-[25%] xl:w-[20%]  rounded-3xl max-h-[auto] lg:max-h-[1000px] p-4 sm:p-8 lg:p-0">
@@ -417,7 +426,12 @@ export default function Home() {
               {activeTab === "about" && <About />}
               {activeTab === "skills" && <Skills />}
               {activeTab === "projects" && <Project />}
-              {activeTab === "contact" && <Contact />}
+              {activeTab === "contact" && (
+                <Contact
+                  setShowPopup={setShowPopup}
+                  setShowSaveIndicator={setShowSaveIndicator}
+                />
+              )}
               {activeTab === "blogs" && <p>Here are your blogs.</p>}
             </div>
           </div>

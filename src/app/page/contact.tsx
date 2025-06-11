@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Contact = () => {
+const Contact = ({ setShowPopup, setShowSaveIndicator }: any) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -9,11 +9,6 @@ const Contact = () => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [showPopup, setShowPopup] = useState<{
-    type: "success" | "error";
-    message: string;
-  } | null>(null);
-  const [showSaveIndicator, setShowSaveIndicator] = useState(false);
 
   // Load saved form data on component mount
   useEffect(() => {
@@ -92,77 +87,8 @@ const Contact = () => {
   return (
     <div className="relative flex flex-col items-start justify-start gap-8 w-full ">
       {/* Popup Notifications */}
-      <div
-        className={`fixed top-3 lg:bottom-4 right-4 transform transition-all duration-500 ${
-          showPopup ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-        }`}
-      >
-        <div
-          className={`${
-            showPopup?.type === "success" ? "bg-green-500/90" : "bg-red-500/90"
-          } backdrop-blur-sm text-white px-6 py-3 rounded-lg shadow-lg flex items-center gap-3`}
-        >
-          {showPopup?.type === "success" ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
-          )}
-          <span>{showPopup?.message}</span>
-        </div>
-      </div>
 
       {/* Auto-save Indicator */}
-      <div
-        className={`fixed top-3 lg:bottom-4 right-4 transform transition-all duration-300 ${
-          showSaveIndicator
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-full opacity-0"
-        }`}
-      >
-        <div className="bg-blue-500/90 backdrop-blur-sm text-white px-4 py-2 rounded-lg shadow-lg flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 animate-spin"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-            />
-          </svg>
-          <span className="text-sm">Saving...</span>
-        </div>
-      </div>
 
       <div className="w-full max-w-2xl mx-auto pb-5 lg:pb-0">
         <form onSubmit={handleSubmit} className="space-y-6">
