@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Portfolio | Anjul Singh",
   description:
-    "Explore Anjul Singh's portfolio – Full Stack Developer specializing in React, Node.js, and modern web technologies. View projects, skills, and contact info.",
+    "Explore Anjul Singh portfolio – Full Stack Developer specializing in React, Node.js, and modern web technologies. View projects, skills, and contact info.",
   keywords: [
     "Anjul Singh",
     "Full Stack Developer",
