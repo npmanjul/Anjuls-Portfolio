@@ -5,16 +5,17 @@ import Skills from "./page/skills";
 import Project from "./page/project";
 import Contact from "./page/contact";
 import Image from "next/image";
+import Navigation from "../components/navigation/Navigation";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("about");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
-    <div className="flex items-center justify-center h-full lg:h-screen w-full min-h-[100vh]  bg-neutral-900">
+    <div className="relative flex items-center justify-center h-full lg:h-screen w-full min-h-[100vh]  bg-black">
       <div className="lg:max-w-[1500px] py-5 pb-15 lg:py-15 w-full flex lg:flex-row flex-col items-center lg:items-start justify-start lg:justify-center gap-4 md:gap-6 h-full">
         {/* left part */}
-        <div className="flex flex-col items-center justify-center border-2 border-neutral-600 bg-neutral-800 h-auto lg:h-full w-[95%] lg:w-[25%] xl:w-[20%]  rounded-3xl max-h-[auto] lg:max-h-[1000px] p-4 sm:p-8 lg:p-0">
+        <div className="flex flex-col items-center justify-center border-2 border-neutral-600 bg-white/20 backdrop-blur-sm h-auto lg:h-full w-[95%] lg:w-[25%] xl:w-[20%]  rounded-3xl max-h-[auto] lg:max-h-[1000px] p-4 sm:p-8 lg:p-0">
           <div className="flex flex-col items-center justify-evenly w-full h-full lg:pt-5">
             <div className="flex flex-row lg:flex-col items-center justify-start lg:justify-center gap-5 md:gap-10 lg:gap-2 w-full">
               <div className="bg-neutral-700 p-1 rounded-2xl">
@@ -348,50 +349,9 @@ export default function Home() {
         </div>
 
         {/* Right Part */}
-        <div className="relative bg-neutral-800 border-2 border-neutral-600 h-auto lg:h-full w-[95%] lg:w-[60%] max-h-[100%]  lg:max-h-[1000px] rounded-3xl overflow-y-auto scrollbar-hide">
-          <div className="fixed lg:sticky bottom-0 lg:bottom-auto left-0 lg:left-auto right-0 lg:right-auto w-full lg:w-[60%] p-3 lg:p-5 bg-neutral-700 border-t-2 lg:border-t-0 border-l-2 border-b-2 border-neutral-600 rounded-t-3xl lg:rounded-t-none lg:rounded-bl-3xl ml-auto to-transparent z-50">
-            <div className="w-full flex items-center justify-between lg:justify-evenly font-bold text-[14px] lg:text-[16px] text-neutral-300 overflow-x-auto">
-              <button
-                className={`pb-2 cursor-pointer whitespace-nowrap ${
-                  activeTab === "about" ? "font-bold text-yellow-300" : ""
-                }`}
-                onClick={() => setActiveTab("about")}
-              >
-                About
-              </button>
-              <button
-                className={`pb-2 cursor-pointer whitespace-nowrap ${
-                  activeTab === "skills" ? "font-bold text-yellow-300" : ""
-                }`}
-                onClick={() => setActiveTab("skills")}
-              >
-                Skills
-              </button>
-              <button
-                className={`pb-2 cursor-pointer whitespace-nowrap ${
-                  activeTab === "projects" ? "font-bold text-yellow-300" : ""
-                }`}
-                onClick={() => setActiveTab("projects")}
-              >
-                Project
-              </button>
-              <button
-                className={`pb-2 cursor-pointer whitespace-nowrap ${
-                  activeTab === "contact" ? "font-bold text-yellow-300" : ""
-                }`}
-                onClick={() => setActiveTab("contact")}
-              >
-                Contact
-              </button>
-              <button
-                className={`pb-2 cursor-pointer whitespace-nowrap ${
-                  activeTab === "blogs" ? "font-bold text-yellow-300" : ""
-                }`}
-                onClick={() => setActiveTab("blogs")}
-              >
-                Blogs
-              </button>
-            </div>
+        <div className="relative bg-white/20 backdrop-blur-sm border-2 border-neutral-600 h-auto lg:h-full w-[95%] lg:w-[60%] max-h-[100%]  lg:max-h-[1000px] rounded-3xl overflow-y-auto scrollbar-hide">
+          <div className="hidden lg:block lg:sticky lg:bottom-auto lg:top-0 lg:left-auto lg:right-auto w-full lg:w-[60%] p-3 lg:p-5 bg-neutral-700/95 backdrop-blur-xl border-t-2 lg:border-t-0 border-l-2 border-b-2 border-neutral-600 rounded-t-3xl lg:rounded-t-none lg:rounded-bl-3xl ml-auto z-50 shadow-lg">
+            <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
           </div>
           <div className="absolute top-0 left-0 p-4 lg:p-8">
             <div className="text-white font-bold text-2xl lg:text-4xl">
@@ -405,7 +365,7 @@ export default function Home() {
               <div className="w-[40px] lg:w-[60px] h-[5px] absolute top-16 lg:top-20 left-4 lg:left-8 bg-yellow-300 rounded-full"></div>
             </div>
           </div>
-          <div className="h-full gap-6 w-full p-4 lg:p-10   mt-20 lg:mt-2">
+          <div className="h-full gap-6 w-full p-4 lg:p-10  mt-20 lg:mt-2">
             {/* Tab Content */}
             <div>
               {activeTab === "about" && <About />}
@@ -416,6 +376,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="fixed bottom-2 lg:hidden  w-[90%] lg:w-[60%] p-3 lg:p-5 bg-neutral-700/95 backdrop-blur-xl border-2 lg:border-t-0  border-neutral-600 rounded-3xl lg:rounded-t-none lg:rounded-bl-3xl ml-auto z-50 shadow-lg">
+        <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
       </div>
     </div>
   );
