@@ -4,6 +4,7 @@ import About from "./page/about";
 import Skills from "./page/skills";
 import Project from "./page/project";
 import Contact from "./page/contact";
+import Image from "next/image";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("about");
@@ -17,9 +18,11 @@ export default function Home() {
           <div className="flex flex-col items-center justify-evenly w-full h-full lg:pt-5">
             <div className="flex flex-row lg:flex-col items-center justify-start lg:justify-center gap-5 md:gap-10 lg:gap-2 w-full">
               <div className="bg-neutral-700 p-1 rounded-2xl">
-                <img
+                <Image
                   src="/profile.png"
                   alt="profile"
+                  width={100}
+                  height={100}
                   className="w-25 h-25 sm:w-40 sm:h-40 rounded-2xl"
                 />
               </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/loader/Loader";
+import Image from "next/image";
 
 type Project = {
   _id: string;
@@ -51,9 +52,11 @@ const Project = () => {
             <div className="flex flex-col border-2 border-neutral-700 rounded-xl overflow-hidden hover:bg-neutral-800/50 transition-all duration-300">
               {/* Project Image */}
               <div className="relative w-full h-48 overflow-hidden">
-                <img
+                <Image
                   src={project.image}
                   alt={project.projectname}
+                  width={1000}
+                  height={1000}
                   className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

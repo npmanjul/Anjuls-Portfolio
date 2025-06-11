@@ -82,6 +82,7 @@ const Contact = () => {
         type: "error",
         message: "Failed to send message. Please try again.",
       });
+      console.error("Error sending message:", error);
     } finally {
       setIsSubmitting(false);
       setTimeout(() => setShowPopup(null), 3000);

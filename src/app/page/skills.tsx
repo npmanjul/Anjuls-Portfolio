@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/loader/Loader";
+import Image from "next/image";
 
 type Skill = {
   _id: string;
@@ -81,9 +82,11 @@ const Skills = () => {
               >
                 <div className="flex items-center justify-center gap-3 p-3 border-2 border-neutral-700 rounded-xl hover:bg-neutral-800/50 transition-all duration-300">
                   <div className="relative w-5 h-5">
-                    <img
+                    <Image
                       src={skill.image}
                       alt={skill.name}
+                      width={100}
+                      height={100}
                       className="w-full h-full object-contain filter group-hover:brightness-110 transition-all duration-300"
                     />
                   </div>
