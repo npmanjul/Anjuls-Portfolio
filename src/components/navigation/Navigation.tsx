@@ -1,51 +1,25 @@
 import React from "react";
 
-const Navigation = ({ activeTab, setActiveTab }: any) => {
+type NavigationProps = {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+};
+
+const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
   return (
-    <>
-      <div className="w-full flex items-center justify-evenly font-bold text-[14px] lg:text-[16px] text-neutral-300 overflow-x-auto scrollbar-hide">
+    <div className="w-full flex items-center justify-evenly font-bold text-[14px] lg:text-[16px] text-neutral-300 overflow-x-auto scrollbar-hide">
+      {["about", "skills", "projects", "contact", "blogs"].map((tab) => (
         <button
+          key={tab}
           className={`lg:pb-2 cursor-pointer whitespace-nowrap ${
-            activeTab === "about" ? "font-bold text-yellow-300" : ""
+            activeTab === tab ? "font-bold text-yellow-300" : ""
           }`}
-          onClick={() => setActiveTab("about")}
+          onClick={() => setActiveTab(tab)}
         >
-          About
+          {tab.charAt(0).toUpperCase() + tab.slice(1)}
         </button>
-        <button
-          className={`lg:pb-2 cursor-pointer whitespace-nowrap ${
-            activeTab === "skills" ? "font-bold text-yellow-300" : ""
-          }`}
-          onClick={() => setActiveTab("skills")}
-        >
-          Skills
-        </button>
-        <button
-          className={`lg:pb-2 cursor-pointer whitespace-nowrap ${
-            activeTab === "projects" ? "font-bold text-yellow-300" : ""
-          }`}
-          onClick={() => setActiveTab("projects")}
-        >
-          Project
-        </button>
-        <button
-          className={`lg:pb-2 cursor-pointer whitespace-nowrap ${
-            activeTab === "contact" ? "font-bold text-yellow-300" : ""
-          }`}
-          onClick={() => setActiveTab("contact")}
-        >
-          Contact
-        </button>
-        <button
-          className={`lg:pb-2 cursor-pointer whitespace-nowrap ${
-            activeTab === "blogs" ? "font-bold text-yellow-300" : ""
-          }`}
-          onClick={() => setActiveTab("blogs")}
-        >
-          Blogs
-        </button>
-      </div>
-    </>
+      ))}
+    </div>
   );
 };
 
