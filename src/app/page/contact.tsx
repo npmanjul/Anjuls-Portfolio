@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 type ContactProps = {
-  setShowPopup: (popup: { type: string; message: string } | null) => void;
+  setShowPopup: (
+    popup: { type: "success" | "error"; message: string } | null
+  ) => void;
   setShowSaveIndicator: (show: boolean) => void;
 };
 
