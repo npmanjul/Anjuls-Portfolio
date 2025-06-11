@@ -1,6 +1,15 @@
 import React from "react";
 
-const Notification_Popup = ({ showPopup }: any) => {
+type NotificationPopupProps = {
+  showPopup: {
+    type: "success" | "error";
+    message: string;
+  } | null;
+};
+
+const Notification_Popup: React.FC<NotificationPopupProps> = ({
+  showPopup,
+}) => {
   return (
     <div
       className={`fixed top-2 right-2 transform transition-all duration-500 z-100 ${

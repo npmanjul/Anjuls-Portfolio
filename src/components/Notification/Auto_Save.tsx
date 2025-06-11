@@ -1,6 +1,10 @@
 import React from "react";
 
-const Auto_Save = ({ showSaveIndicator }: any) => {
+type AutoSaveProps = {
+  showSaveIndicator: boolean;
+};
+
+const Auto_Save: React.FC<AutoSaveProps> = ({ showSaveIndicator }) => {
   return (
     <div
       className={`fixed top-2 right-2 transform transition-all duration-300 z-100 ${

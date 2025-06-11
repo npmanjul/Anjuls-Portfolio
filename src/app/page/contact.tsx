@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-const Contact = ({ setShowPopup, setShowSaveIndicator }: any) => {
+type ContactProps = {
+  setShowPopup: (popup: { type: string; message: string } | null) => void;
+  setShowSaveIndicator: (show: boolean) => void;
+};
+
+const Contact: React.FC<ContactProps> = ({
+  setShowPopup,
+  setShowSaveIndicator,
+}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,7 +39,7 @@ const Contact = ({ setShowPopup, setShowSaveIndicator }: any) => {
       setShowSaveIndicator(true);
       setTimeout(() => setShowSaveIndicator(false), 2000);
     }
-  }, [formData]);
+  }, [formData, setShowSaveIndicator]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
