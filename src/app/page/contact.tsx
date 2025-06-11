@@ -90,13 +90,11 @@ const Contact = () => {
   };
 
   return (
-    <div className="flex flex-col items-start justify-start gap-8 w-full ">
+    <div className="relative flex flex-col items-start justify-start gap-8 w-full ">
       {/* Popup Notifications */}
       <div
-        className={`fixed lg:bottom-2 lg:right-4 top-2 right-4 transform transition-all duration-500 ${
-          showPopup
-            ? "translate-y-0 opacity-100"
-            : "translate-y-[-100%] lg:translate-y-full opacity-0"
+        className={`fixed top-3 lg:bottom-4 right-4 transform transition-all duration-500 ${
+          showPopup ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
         }`}
       >
         <div
@@ -141,7 +139,7 @@ const Contact = () => {
 
       {/* Auto-save Indicator */}
       <div
-        className={`fixed top-4 right-4 transform transition-all duration-300 ${
+        className={`fixed top-3 lg:bottom-4 right-4 transform transition-all duration-300 ${
           showSaveIndicator
             ? "translate-y-0 opacity-100"
             : "-translate-y-full opacity-0"

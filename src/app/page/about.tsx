@@ -35,15 +35,16 @@ const About = () => {
   return (
     <div className="flex flex-col items-start justify-start gap-8 w-full pb-5 lg:pb-0">
       <div className="text-lg text-gray-300 leading-relaxed space-y-4">
-        <p className="text-xl">
-          Anjul Singh is a 3rd-year B.Tech student in Information Technology at
-          Madan Mohan Malaviya University of Technology (MMMUT), Gorakhpur, U.P.
+        <p>
+          I’m Anjul Singh, a final-year B.Tech IT student at MMMUT, Gorakhpur
+          with strong problem-solving skills and a passion for building
+          efficient digital solutions.
         </p>
 
         <p>
-          With strong problem-solving abilities, he focuses on building dynamic
-          and user-friendly digital solutions, constantly enhancing his
-          knowledge of new technologies to ensure efficiency and innovation.
+          I specialize in MERN stack web development and mobile app development
+          using React Native, focusing on creating responsive, user-friendly,
+          and impactful applications.
         </p>
       </div>
 

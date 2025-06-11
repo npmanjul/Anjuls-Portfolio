@@ -68,9 +68,9 @@ const Project = () => {
                   {project.projectname}
                 </h3>
 
-                <p className="text-gray-400 text-sm leading-relaxed">
+                {/* <p className="text-gray-400 text-sm leading-relaxed">
                   {project.description}
-                </p>
+                </p> */}
 
                 {/* Project Links */}
                 <div className="flex items-center gap-4 mt-2">
