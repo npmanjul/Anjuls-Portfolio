@@ -100,8 +100,8 @@ const Contact: React.FC<ContactProps> = ({
 
       {/* Auto-save Indicator */}
 
-      <div className="w-full max-w-2xl mx-auto pb-5 lg:pb-0">
-        <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="w-full max-w-2xl mx-auto pb-5 lg:pb-0 ">
+        <form onSubmit={handleSubmit} className="md:space-y-3 space-y-6 ">
           {/* Name Field */}
           <div className="group">
             <label
