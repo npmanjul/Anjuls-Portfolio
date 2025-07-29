@@ -9,6 +9,7 @@ import Navigation from "../components/navigation/Navigation";
 import Notification_Popup from "@/components/Notification/Notification_Popup";
 import Auto_Save from "@/components/Notification/Auto_Save";
 import TerminalLoader from "@/components/loader/TerminalLoader";
+import Resume from "./page/resume";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("about");
@@ -443,7 +444,7 @@ export default function Home() {
                     {activeTab === "skills" && <h1>Skills</h1>}
                     {activeTab === "projects" && <h1>Projects</h1>}
                     {activeTab === "contact" && <h1>Contact</h1>}
-                    {activeTab === "blogs" && <h1>Blogs</h1>}
+                    {activeTab === "resume" && <h1>Resume</h1>}
                   </div>
                   <div className="w-[40px] lg:w-[60px] h-[5px] absolute top-16 lg:top-20 left-4 lg:left-8 bg-yellow-300 rounded-full"></div>
                 </div>
@@ -460,7 +461,7 @@ export default function Home() {
                       setShowSaveIndicator={setShowSaveIndicator}
                     />
                   )}
-                  {activeTab === "blogs" && <p>Here are your blogs.</p>}
+                  {activeTab === "resume" && <Resume />}
                 </div>
               </div>
             </div>
