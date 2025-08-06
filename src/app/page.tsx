@@ -18,9 +18,9 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("about");
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [showPopup, setShowPopup] = useState<{
-    type: "success" | "error";
+    type: "error" | "success";
     message: string;
-  }>();
+  } | null>(null);
   const [showSaveIndicator, setShowSaveIndicator] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
   const [totalVisit, setTotalVisit] = useState(0);
