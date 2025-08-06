@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import About from "./page/about";
 import Skills from "./page/skills";
 import Project from "./page/project";
@@ -10,6 +10,9 @@ import Notification_Popup from "@/components/Notification/Notification_Popup";
 import Auto_Save from "@/components/Notification/Auto_Save";
 import TerminalLoader from "@/components/loader/TerminalLoader";
 import Resume from "./page/resume";
+import io from "socket.io-client";
+import toast from "react-hot-toast";
+import { BACKEND_URL } from "@/components/constants";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("about");
@@ -17,14 +20,90 @@ export default function Home() {
   const [showPopup, setShowPopup] = useState<{
     type: "success" | "error";
     message: string;
-  } | null>(null);
+  }>();
   const [showSaveIndicator, setShowSaveIndicator] = useState(false);
   const [showLoader, setShowLoader] = useState(true);
+  const [totalVisit, setTotalVisit] = useState(0);
+  const [visiterInfo, setVisiterInfo] = useState<{
+    ip: string;
+    city: string;
+    region: string;
+    country: string;
+  } | null>(null);
+
+  const getTotalVisit = async () => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/analytics/visitercount`);
+      const data = await res.json();
+      setTotalVisit(data.count);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const addIPAddress = async () => {
+    try {
+      const ipAddress = await fetch("https://ipinfo.io/json");
+      const ipdata = await ipAddress.json();
+
+      setVisiterInfo({
+        ip: ipdata.ip,
+        city: ipdata.city,
+        region: ipdata.region,
+        country: ipdata.country,
+      });
+
+      const res = await fetch(`${BACKEND_URL}/analytics/addip`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ip: ipdata.ip,
+          city: ipdata.city,
+          region: ipdata.region,
+          country: ipdata.country,
+        }),
+      });
+
+      const data = await res.json();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const socketRef = useRef<any>(null);
+
+  useEffect(() => {
+    // Create socket only once
+    if (!socketRef.current) {
+      socketRef.current = io("https://portfolio-backend-1-7bjw.onrender.com");
+    }
+
+    // Register event only once
+    if (visiterInfo) {
+      const socket = socketRef.current;
+      socket.on("new-visitor", () => {
+        toast(
+          `👋 A new visitor from ${visiterInfo?.city}, ${visiterInfo?.region}, ${visiterInfo?.country} just landed on the site! 🚀`,
+          {
+            duration: 3000,
+          }
+        );
+      });
+      // Cleanup on unmount
+      return () => {
+        socket.off("new-visitor");
+      };
+    }
+  }, [visiterInfo]);
 
   useEffect(() => {
     setTimeout(() => {
       setShowLoader(false);
     }, 3700);
+    addIPAddress();
+    getTotalVisit();
   }, []);
 
   return (
@@ -261,12 +340,18 @@ export default function Home() {
                         </svg>
                       </a>
                     </div>
+                    <div className="w-full">
+                      <div className="flex justify-center items-center gap-1 py-2 text-[12px] text-neutral-300 bg-neutral-700 rounded-2xl w-full">
+                        Total Visitor :{" "}
+                        <span className="font-bold">{totalVisit}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
                 {/* Desktop Menu */}
                 <div className="hidden lg:block">
-                  <div className="flex flex-col items-start justify-center gap-4">
+                  <div className="flex flex-col items-start justify-center gap-2">
                     {/* Email */}
                     <div className="flex items-center justify-center gap-3">
                       <div className="p-3 bg-neutral-700 rounded-xl">
@@ -369,7 +454,7 @@ export default function Home() {
                 </div>
 
                 <div className="hidden lg:block">
-                  <div className="flex justify-center items-center gap-5 py-3">
+                  <div className="flex justify-center items-center gap-5 py-2">
                     <a
                       href="https://github.com/npmanjul"
                       target="_blank"
@@ -423,6 +508,12 @@ export default function Home() {
                     </a>
                   </div>
                 </div>
+                <div className="hidden lg:block w-[95%]">
+                  <div className="flex justify-center items-center gap-1 py-2 text-[12px] text-neutral-300 bg-neutral-700 rounded-2xl w-full">
+                    Total Visitor :{" "}
+                    <span className="font-bold">{totalVisit}</span>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -466,6 +557,7 @@ export default function Home() {
               </div>
             </div>
           </div>
+
           <div className="fixed bottom-2 lg:hidden  w-[90%] lg:w-[60%] p-3 lg:p-5 bg-neutral-700/95 backdrop-blur-xl border-2 lg:border-t-0  border-neutral-600 rounded-3xl lg:rounded-t-none lg:rounded-bl-3xl ml-auto z-50 shadow-lg">
             <Navigation activeTab={activeTab} setActiveTab={setActiveTab} />
           </div>

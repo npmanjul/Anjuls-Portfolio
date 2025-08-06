@@ -67,7 +67,7 @@ const About = () => {
                     {card.title}
                   </h3>
                 </div>
-                <p className="text-gray-400 leading-relaxed">
+                <p className="text-gray-400 leading-relaxed text-[14px]">
                   {card.description}
                 </p>
               </div>

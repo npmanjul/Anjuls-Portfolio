@@ -1,11 +1,26 @@
-import React from "react";
+import { BACKEND_URL } from "@/components/constants";
+import React, { useEffect } from "react";
 
 const Resume = () => {
+  const [resume, setResume] = React.useState<string>();
+  const getResume = async () => {
+    try {
+      const resp = await fetch(`${BACKEND_URL}/resume/getResume`);
+      const data = await resp.json();
+      setResume(data.resumeURL);
+    } catch (error) {
+      console.error("Failed to fetch resume:", error);
+    }
+  };
+
+  useEffect(() => {
+    getResume();
+  }, []);
   return (
     <>
       <div className="w-full h-full overflow-hidden">
         <iframe
-          src="https://drive.google.com/file/d/1EanFN8iraGFZz0l79nWqQO5eFUPJiDzA/preview"
+          src={resume}
           title="Anjul Singh's Resume"
           height="570"
           width="100%"

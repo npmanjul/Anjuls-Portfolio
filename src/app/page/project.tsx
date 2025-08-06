@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/loader/Loader";
 import Image from "next/image";
+import { BACKEND_URL } from "@/components/constants.js";
 
 type Project = {
   _id: string;
@@ -21,9 +22,7 @@ const Project = () => {
   const getProjects = async () => {
     try {
       setIsLoading(true);
-      const response = await fetch(
-        "https://portfolio-backend-eight-ashen.vercel.app/api/v1/projects/getAllProjects"
-      );
+      const response = await fetch(`${BACKEND_URL}/projects/getAllProjects`);
       const data = await response.json();
       setProjects(data.projects);
     } catch (error) {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BACKEND_URL } from "../../components/constants.js";
 
 type ContactProps = {
   setShowPopup: (
@@ -58,16 +59,13 @@ const Contact: React.FC<ContactProps> = ({
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(
-        "https://portfolio-backend-eight-ashen.vercel.app/api/v1/contacts/addNewContact",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${BACKEND_URL}/contacts/addNewContact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       if (response.ok) {
         setFormData({ name: "", email: "", phone: "", message: "" });

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "@/components/loader/Loader";
 import Image from "next/image";
+import { BACKEND_URL } from "@/components/constants.js";
 
 type Skill = {
   _id: string;
@@ -27,9 +28,7 @@ const Skills = () => {
 
   const getSkills = async () => {
     try {
-      const response = await fetch(
-        "https://portfolio-backend-eight-ashen.vercel.app/api/v1/skills/getAllSkills"
-      );
+      const response = await fetch(`${BACKEND_URL}/skills/getAllSkills`);
       const data = await response.json();
       setSkills(data.skills);
     } catch (error) {
@@ -40,7 +39,7 @@ const Skills = () => {
   const getExperiences = async () => {
     try {
       const response = await fetch(
-        "https://portfolio-backend-eight-ashen.vercel.app/api/v1/experiences/getAllExperience"
+        `${BACKEND_URL}/experiences/getAllExperience`
       );
       const data = await response.json();
       setExperiences(data.experiences);
