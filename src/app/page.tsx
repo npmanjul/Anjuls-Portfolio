@@ -30,6 +30,7 @@ export default function Home() {
     region: string;
     country: string;
   } | null>(null);
+  const [activeUsers, setActiveUsers] = useState<number>(1);
 
   const getTotalVisit = async () => {
     try {
@@ -77,7 +78,7 @@ export default function Home() {
   useEffect(() => {
     // Create socket only once
     if (!socketRef.current) {
-      socketRef.current = io("https://portfolio-backend-1-7bjw.onrender.com");
+      socketRef.current = io("https://portfolio-live-visiter.onrender.com");
     }
 
     // Register event only once
@@ -91,9 +92,15 @@ export default function Home() {
           }
         );
       });
+
+      socket.on("active-users", (count: number) => {
+        setActiveUsers(count);
+      });
+
       // Cleanup on unmount
       return () => {
         socket.off("new-visitor");
+        socket.off("active-users");
       };
     }
   }, [visiterInfo]);
@@ -341,9 +348,13 @@ export default function Home() {
                       </a>
                     </div>
                     <div className="w-full">
-                      <div className="flex justify-center items-center gap-1 py-2 text-[12px] text-neutral-300 bg-neutral-700 rounded-2xl w-full">
+                      <div className="flex justify-center items-center gap-1 py-2 text-[12px] text-neutral-300 bg-neutral-700 rounded-2xl ">
                         Total Visitor :{" "}
                         <span className="font-bold">{totalVisit}</span>
+                      </div>
+                      <div>
+                        Active Users :{" "}
+                        <span className="font-bold">●{activeUsers}</span>
                       </div>
                     </div>
                   </div>
@@ -351,7 +362,7 @@ export default function Home() {
 
                 {/* Desktop Menu */}
                 <div className="hidden lg:block">
-                  <div className="flex flex-col items-start justify-center gap-2">
+                  <div className="flex flex-col items-start justify-center gap-4">
                     {/* Email */}
                     <div className="flex items-center justify-center gap-3">
                       <div className="p-3 bg-neutral-700 rounded-xl">
@@ -454,7 +465,7 @@ export default function Home() {
                 </div>
 
                 <div className="hidden lg:block">
-                  <div className="flex justify-center items-center gap-5 py-2">
+                  <div className="flex justify-center items-center gap-5 py-4">
                     <a
                       href="https://github.com/npmanjul"
                       target="_blank"
@@ -509,9 +520,18 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="hidden lg:block w-[95%]">
-                  <div className="flex justify-center items-center gap-1 py-2 text-[12px] text-neutral-300 bg-neutral-700 rounded-2xl w-full">
-                    Total Visitor :{" "}
-                    <span className="font-bold">{totalVisit}</span>
+                  <div className="flex justify-center items-center gap-5 py-2 text-[12px] text-neutral-300 bg-neutral-700 rounded-2xl ">
+                    <div>
+                      Total Visitor :{" "}
+                      <span className="font-bold">{totalVisit}</span>
+                    </div>
+                    <div className="flex items-center justify-center gap-1">
+                      <span className="font-bold text-green-600 text-xl pb-1">
+                        ●
+                      </span>{" "}
+                      Active Users :{" "}
+                      <span className="font-bold">{activeUsers}</span>
+                    </div>
                   </div>
                 </div>
               </div>
