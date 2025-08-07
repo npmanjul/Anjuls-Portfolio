@@ -348,13 +348,18 @@ export default function Home() {
                       </a>
                     </div>
                     <div className="w-full">
-                      <div className="flex justify-center items-center gap-1 py-2 text-[12px] text-neutral-300 bg-neutral-700 rounded-2xl ">
-                        Total Visitor :{" "}
-                        <span className="font-bold">{totalVisit}</span>
-                      </div>
-                      <div>
-                        Active Users :{" "}
-                        <span className="font-bold">●{activeUsers}</span>
+                      <div className="flex justify-center items-center gap-5 py-2 text-[12px] text-neutral-300 bg-neutral-700 rounded-2xl ">
+                        <div>
+                          Total Visitor :{" "}
+                          <span className="font-bold">{totalVisit}</span>
+                        </div>
+                        <div className="flex items-center justify-center gap-1">
+                          <span className="font-bold text-green-600 text-xl pb-1">
+                            ●
+                          </span>{" "}
+                          Active Users :{" "}
+                          <span className="font-bold">{activeUsers}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
